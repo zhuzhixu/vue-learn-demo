@@ -8,6 +8,16 @@
     <title>vue</title>
 </head>
 <body>
-    
+    <div id="vue">
+        <p>{{msg}}</p>
+    </div>
 </body>
+<script>
+    new Vue({
+        el: '#vue',
+        data: {
+            msg: 'vue起步'
+        }
+    })
+</script>
 </html>
