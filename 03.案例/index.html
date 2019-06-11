@@ -22,12 +22,12 @@
             <div class="panel-body">
 
                 <label for="name">name:
-                    <input type="text" class="form-control" id="name" name="name" v-model="name">
-                    <button type="submit" class="btn btn-primary" @click="add">确认</button>
+                    <input type="text" class="form-control" id="name" name="name" v-model="name" @keyup.rr="add">
+                    <button type="submit" class="btn btn-primary" @click="add" >确认</button>
                 </label>
 
                 <label for="key">key:
-                    <input type="text" class="form-control" id="key" name="ksy" v-model="keyword">
+                    <input type="text" class="form-control" id="key" name="ksy" v-model="keyword" >
                     <button type="submit" class="btn btn-primary">确认</button>
                 </label>
             </div>
@@ -45,7 +45,7 @@
                 <tr v-for="item in search(keyword)" :key="item.id">
                     <td scope="row">{{item.id}}</td>
                     <td>{{item.name}}</td>
-                    <td>{{item.time}}</td>
+                    <td>{{item.time | datefilter()}}</td> 
                     <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
 

@@ -1,4 +1,9 @@
-new Vue({
+// Vue.filter("msgfilter", function(msg){
+//     return msg + "123"
+// })  
+//全局filter过滤器
+Vue.config.keyCodes.rr = 13
+var app = new Vue({
     el: '#vue',
     data: {
         list: [{
@@ -27,6 +32,7 @@ new Vue({
     },
     methods: {
         add: function () {
+            console.log(globalThis.app.list)
             let object = {
                 id: this.list[this.list.length - 1].id + 1,
                 name: this.name,
@@ -43,6 +49,7 @@ new Vue({
             })
             console.log(index)
             this.list.splice(index, 1)
+            
         },
         search: function () {
             if (this.keyword == '') {
@@ -65,4 +72,24 @@ new Vue({
             }
         }
     },
+    filters:{
+        //局部filter过滤器
+        msgfilter: function(msg){
+            return msg + "123"
+        },
+        datefilter: function(date , patten="yyyy-MM-dd HH:mm:ss"){
+            let d = new Date(date)
+            let y = d.getFullYear()
+            let m = (d.getMonth() +1).toString().padStart(2,'0')
+            let da = (d.getDate()).toString().padStart(2 , '0')
+            let h = (d.getHours()).toString().padStart(2,'0')
+            let mm = (d.getMinutes()).toString().padStart(2, '0')
+            let s = (d.getSeconds()).toString().padStart(2 , '0')
+            if(patten === "yyyy-MM-dd"){
+                return `${y}-${m}-${da}`
+            }
+            return `${y}-${m}-${da} ${h}:${mm}:${s}`
+        }
+    }
+
 })
