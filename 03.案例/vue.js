@@ -2,7 +2,13 @@
 //     return msg + "123"
 // })  
 //全局filter过滤器
-Vue.config.keyCodes.rr = 13
+Vue.config.keyCodes.rr = 13 //配置keycode 按键
+
+Vue.directive("focus", {
+    inserted: (el)=>{
+        el.focus()
+    }
+})//创建全局指令
 var app = new Vue({
     el: '#vue',
     data: {
