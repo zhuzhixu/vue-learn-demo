@@ -7,8 +7,20 @@ Vue.config.keyCodes.rr = 13 //配置keycode 按键
 Vue.directive("focus", {
     inserted: (el)=>{
         el.focus()
+    },
+    updated :(el)=> {
+        console.log('update')
+    },
+    bind:(el,binding)=>{
+        console.log(binding)
     }
 })//创建全局指令
+
+Vue.directive('color', {
+    bind:(el,binding)=>{
+        el.style.color = binding.value
+    }
+})//v-color 指令
 var app = new Vue({
     el: '#vue',
     data: {
@@ -95,6 +107,13 @@ var app = new Vue({
                 return `${y}-${m}-${da}`
             }
             return `${y}-${m}-${da} ${h}:${mm}:${s}`
+        }
+    },
+    directives:{
+        "fontsize":{
+            bind:(el,binding)=>{
+                el.style.fontWeight = binding.value
+            }
         }
     }
 

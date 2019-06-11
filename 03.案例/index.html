@@ -22,12 +22,12 @@
             <div class="panel-body">
 
                 <label for="name">name:
-                    <input type="text" class="form-control" id="name" name="name" v-model="name" @keyup.rr="add">
+                    <input type="text" class="form-control" id="name" name="name" v-model="name" @keyup.rr="add" >
                     <button type="submit" class="btn btn-primary" @click="add" >确认</button>
                 </label>
 
                 <label for="key">key:
-                    <input type="text" class="form-control" id="key" name="ksy" v-model="keyword" v-focus>
+                    <input type="text" class="form-control" id="key" name="ksy" v-model="keyword" v-focus v-color="'grey'" >
                     <button type="submit" class="btn btn-primary">确认</button>
                 </label>
             </div>
