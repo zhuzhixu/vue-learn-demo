@@ -11,12 +11,26 @@
     .v-leave-to,
     .v-enter{
         opacity: 0;
+        transform: translateX(70px)
     }
 
     .v-enter-active,
     .v-leave-active{
         transition: all 2s ease;
     }
+
+    
+    .second-leave-to,
+    .second-enter{
+        opacity: 0;
+        transform: translateX(200px)
+    }
+
+    .second-enter-active,
+    .second-leave-active{
+        transition: all 2s ease;
+    }
+
 </style>
 <body>
     <div id="app">
@@ -24,13 +38,20 @@
         <transition>
             <h1 v-if="flag">这是一个标题</h1>
         </transition>
+        <hr>
+        <input type="button" @click="flag1=!flag1" value="按钮2">
+        <transition name="second" duration="{enter: 1000, leave:400}"> 
+            <h6 v-if="flag1">这是标题6</h6>
+        </transition>
+        <!-- transition有vue提供的组件 该组件有很多props-->
     </div>
 </body>
 <script>
     var app = new Vue({
         el:"#app",
         data:{
-            flag:false
+            flag:false,
+            flag1: false
         },
         methods: {
             

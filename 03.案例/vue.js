@@ -17,7 +17,8 @@ Vue.directive("focus", {
 })//创建全局指令
 
 Vue.directive('color', {
-    bind:(el,binding)=>{
+    inserted:(el,binding)=>{
+        console.log("el   :" + el.offsetWidth);
         el.style.color = binding.value
     }
 })//v-color 指令
