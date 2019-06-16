@@ -90,10 +90,12 @@
                     content: this.content,
                     date: new Date()
                 }])
+                this.name = ''
+                this.content = ''
             }
         }
     })
-    new Vue({
+    var vm = new Vue({
         el: "#app",
         data: {
             list: [{
