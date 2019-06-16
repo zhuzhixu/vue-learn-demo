@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <test @test="show"></test>
+    </div>
+</body>
+<script>
+    Vue.component('test',{
+        template:`
+            <div>
+                <input type="button" @click="test" value="测试"/>
+                <h1 v-if="flag">组件事件测试</h1>
+            </div>
+        `,
+        data(){
+            return {
+                flag : false
+            }
+        },
+        methods: {
+            test(){
+                this.flag = !this.flag
+                this.$emit('test', [flag= this.flag])
+            }
+        },
+    })
+    new Vue({
+        el: "#app",
+        methods:{
+            show(data){
+                console.log(data);
+            }
+        }
+    })
+</script>
+</html>
