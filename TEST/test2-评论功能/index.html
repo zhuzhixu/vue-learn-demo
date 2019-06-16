@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,21 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
         <show :data="list"></show>
-        <gongneng @submit="add" ></gongneng>
+        <gongneng @submit="add"></gongneng>
     </div>
 </body>
 <template id="pinglun">
-    <textarea rows="30" cols="100" style="font-size: 18px" >{{chageData() }}</textarea>
+    <textarea rows="30" cols="100" style="font-size: 18px">{{chageData() }}</textarea>
 </template>
 <template id="p">
     <div>
         name:<input type="text" id="name" v-model="name" />
         content:<input type="text" id="content" v-model="content" />
-        <input type="button" @click="submit" value="提交"/>
+        <input type="button" @click="submit" value="提交" />
     </div>
 </template>
 <script>
@@ -41,60 +43,83 @@
 
 
     //显示评论组件
-    Vue.component('show',{
-        template:"#pinglun",
-        props:['data'],
+    Vue.component('show', {
+        template: "#pinglun",
+        props: ['data'],
         methods: {
-            chageData(){
+            chageData() {
                 let p = ""
-                this.data.forEach((item)=>{
-                    let word = `名字:${item.name} 内容:${item.content} 时间:${this.$options.methods.dateformate(item.date)}`
+                this.data.forEach((item) => {
+                    let word =
+                        `名字:${item.name} 内容:${item.content} 时间:${this.$options.methods.dateformate(item.date)}`
                     p += (word + "\n")
                 })
                 return p
             },
-            dateformate(msg){
-                  let d = new Date(msg)
-                  let yyyy = d.getFullYear()
-                  let MM = (d.getMonth() + 1).toString().padStart(2,'0')
-                  let dd = d.getDate().toString().padStart(2,'0')
-                  let HH = d.getHours().toString().padStart(2,'0')
-                  let mm = d.getMinutes().toString().padStart(2,'0')
-                  let ss = d.getSeconds().toString().padStart(2,'0')
-                  return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`
+            dateformate(msg) {
+                let d = new Date(msg)
+                let yyyy = d.getFullYear()
+                let MM = (d.getMonth() + 1).toString().padStart(2, '0')
+                let dd = d.getDate().toString().padStart(2, '0')
+                let HH = d.getHours().toString().padStart(2, '0')
+                let mm = d.getMinutes().toString().padStart(2, '0')
+                let ss = d.getSeconds().toString().padStart(2, '0')
+                return `${yyyy}-${MM}-${dd} ${HH}:${mm}:${ss}`
             }
 
         },
     })
     //评论功能组件
-    Vue.component('gongneng',{
-        template:"#p",
-        data:()=>{
+    Vue.component('gongneng', {
+        template: "#p",
+        data: () => {
             return {
-                name:'',
-                content:'',
+                name: '',
+                content: '',
             }
         },
-        methods:{
-            submit: function(){
-                console.log({name:this.name, content:this.content, date: this.date});
-                this.$emit('submit', [{name:this.name, content:this.content, date: new Date()}])
+        methods: {
+            submit: function () {
+                console.log({
+                    name: this.name,
+                    content: this.content,
+                    date: this.date
+                });
+                this.$emit('submit', [{
+                    name: this.name,
+                    content: this.content,
+                    date: new Date()
+                }])
             }
         }
     })
     new Vue({
         el: "#app",
-        data:{
-            list:[
-                {name:'zzx', content: 'sklfjlksfjdlk', date: new Date()},
-
-                {name:'zzx', content: 'sklfjlksfjdlk', date: new Date()},
-                {name:'zzx', content: 'sklfjlksfjdlk', date: new Date()},
-                {name:'zzx', content: 'sklfjlksfjdlk', date: new Date()}
+        data: {
+            list: [{
+                    name: 'zzx',
+                    content: 'sklfjlksfjdlk',
+                    date: new Date()
+                },
+                {
+                    name: 'zzx',
+                    content: 'sklfjlksfjdlk',
+                    date: new Date()
+                },
+                {
+                    name: 'zzx',
+                    content: 'sklfjlksfjdlk',
+                    date: new Date()
+                },
+                {
+                    name: 'zzx',
+                    content: 'sklfjlksfjdlk',
+                    date: new Date()
+                }
             ]
         },
-        methods:{
-            add(data){
+        methods: {
+            add(data) {
                 this.list.push({
                     name: data[0].name,
                     content: data[0].content,
@@ -103,6 +128,6 @@
             }
         }
     })
-
 </script>
+
 </html>
