@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>Document</title>
 </head>
+
 <body>
     <div id="app">
         <in1></in1>
@@ -14,24 +16,84 @@
     </div>
 
 
+    <div id="app1">
+        <a href="" @click.prevent="flag = 'one'">1组件</a>
+        <a href="" @click.prevent="flag = 'two'">2组件</a>
+        <a href="" @click.prevent="flag = 'three'">3组件</a>
+        <component :is="flag"></component>
+        <!-- 动态组件 -->
+    </div>
 
-    <template id="in">
-        <div id>
-            <input type="text" value="this is component1"/>
+    <template id="in1">
+        <div>
+            <input type="text" :value="num" />
+            <button @click="increament">+1</button>
         </div>
     </template>
 
 </body>
 <script>
-    Vue.component('in1',{
-        template:'#in'
-    })
-
-    Vue.component('in2',{
-        template:`
-            <input type="text" value="this is component2" />
+    Vue.component('one', {
+        template: `
+            <h1>1组件</h1>
         `
     })
-  
+
+    Vue.component('two', {
+        template: `
+            <h1>2组件</h1>
+        `
+    })
+
+    Vue.component('three', {
+        template: `
+            <h1>3组件</h1>
+        `
+    })
+
+    Vue.component('in1', {
+        template: '#in1',
+        data: function () {
+            return {
+                num: 0
+            }
+        },
+        methods: {
+            increament: function () {
+                this.num++
+            }
+        },
+    })
+
+    Vue.component('in2', {
+        template: `
+            <div>
+                <input type="text" :value="'this is component' + num" />
+                <button @click="increament">+1</button>
+            </div>
+        `,
+        data: () => {
+            return {
+                num: 0
+            }
+        },
+        methods: {
+            increament: function () {
+                this.num++
+            }
+        },
+    })
+    //template模板中的元素不能并列 只能有一个根元素
+    new Vue({
+        el: '#app'
+    })
+
+    new Vue({
+        el: '#app1',
+        data: {
+            flag : 'one'
+        }
+    })
 </script>
+
 </html>
