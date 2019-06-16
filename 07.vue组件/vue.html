@@ -8,7 +8,18 @@
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <title>Document</title>
 </head>
+<style>
+    .title-enter,
+    .title-leave-to{
+        opacity: 0;
+        transform: translateX(150px);
+    }
 
+    .title-enter-active,
+    .title-leave-active{
+        transition: all 0.5s ease;
+    }
+</style>
 <body>
     <div id="app">
         <in1></in1>
@@ -20,8 +31,10 @@
         <a href="" @click.prevent="flag = 'one'">1组件</a>
         <a href="" @click.prevent="flag = 'two'">2组件</a>
         <a href="" @click.prevent="flag = 'three'">3组件</a>
-        <component :is="flag"></component>
-        <!-- 动态组件 -->
+        <transition name="title" mode="out-in">
+            <component :is="flag"></component>
+            <!-- 动态组件 -->
+        </transition>
     </div>
 
     <template id="in1">
