@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        h1{
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        .header{
+            widows: 100%;
+            background-color: orange;
+            height: 60px;
+        }
+        .contain{
+            display: flex;
+            height: 600px;
+        }
+        .left{
+            flex:2;
+            background-color: pink;
+        }
+        .main{
+            flex: 8;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <router-view name="header" ></router-view>
+        <div class="contain">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>  
+    <template id="tem">
+        <h1 class="header">header组件</h1>
+    </template>
+    <template id="left">
+        <h1 class="left">left组件</h1>
+    </template>
+    <template id="main">
+        <h1 class="main">main组件</h1>
+    </template>
+</body>
+<script>
+    const header = {
+        template: "#tem"
+    }
+    const left = {
+        template: "#left"
+    }
+    const main = {
+        template: "#main"
+    }
+
+    const router = new VueRouter({
+        routes:[
+            {path: "/" , components:{
+                "header" : header,
+                "left" : left,
+                "main" : main
+            }}
+        ]
+    })
+    new Vue({
+        el: "#app",
+        router:router
+    })
+</script>
+
+</html>

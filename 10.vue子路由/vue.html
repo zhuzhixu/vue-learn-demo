@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/account">Account</router-link>
+        <router-view></router-view>
+    </div>
+
+    <template id="account">
+        <div>
+            <h1>this is account component</h1>
+            <router-link to="/account/login">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+            <router-view></router-view> 
+            <!-- 用于嵌套显示子路由的组件 -->
+        </div>
+    </template>
+
+    <template id="login">
+        <div>
+            <h1>this is login component</h1>
+        </div>
+    </template>
+
+    <template id="register">
+        <div>
+            <h1>this is register component</h1>
+        </div>
+    </template>
+
+</body>
+<script>
+    const account1 = {
+        template: "#account"
+    }
+    const login1 = {
+        template: "#login"
+    }
+    const register1 = {
+        template: "#register"
+    }
+    
+    const routerAcount = new VueRouter({
+        routes:[
+            {
+                path:"/account", 
+                component: account1,
+                children:[
+                    {path: "login", component : login1},
+                    {path: "register", component : register1}
+                    //注意子路由路径不是在跟路径下用相对路径
+                ]
+            },
+            /*{path: "/account/login", component : login1},
+            {path: "/account/register", component : register1}
+            跟account是同级的路由无法嵌套
+            */
+        ]
+    })
+    new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+
+        },
+        router: routerAcount //3.将路由规则对象注册到vm实例上
+    })
+</script>
+
+</html>
