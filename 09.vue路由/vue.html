@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <router-link to="/login/10?name=zzx">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+        <!-- 4.使用router-view标签 -->
+    </div>
+</body>
+<script>
+    //1.组件模板对象
+    var login = {
+        template: '<h1>登录组件---{{$route.params.id}}----{{$route.query.name}}</h1>', //$route获取路由的实例对象
+        created() {
+            console.log(this.$route)
+        },
+    }
+    var register= {
+        template:'<h1>注册组件</h1>'
+    }
+
+    var routerObj = new VueRouter({
+        //2.路由规则 每个路由规则都有path，component 
+        //path: 监听 路由链接地址
+        //component: 匹配地址就展示component （放组件模板对象）
+        routes:[
+            {path: '/', redirect: '/login'},//重定向到login
+            {path: '/login/:id' , component: login},
+            {path: '/register', component: register}
+        ]
+    })
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods: {
+            
+        },
+        router: routerObj //3.将路由规则对象注册到vm实例上
+    })
+</script>
+</html>
