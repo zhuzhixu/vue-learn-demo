@@ -16,6 +16,7 @@
 <body>
     <div id="app">
        <input type="text" v-model="input">
+       <input type="text" :value="computedProp">
        <router-link to="/login">登录</router-link>
        <router-link to="/register">注册</router-link>
        <router-view></router-view>
@@ -55,8 +56,16 @@
             },
             "$route.path":function(newVal , oldVal){
                 console.log(`newVal: ${newVal}   oldVal:${oldVal}`)
+            },
+            computedProp: function(){
+                console.log('computedPoro改变');
             }
             //监听router 
+        },
+        computed: {
+            computedProp : function(){
+                return this.input
+            }
         },
     })
 </script>
