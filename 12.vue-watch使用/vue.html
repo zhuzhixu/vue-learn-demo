@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <title>Document</title>
+    <style>
+        
+    </style>
+</head>
+
+<body>
+    <div id="app">
+       <input type="text" v-model="input">
+       <router-link to="/login">登录</router-link>
+       <router-link to="/register">注册</router-link>
+       <router-view></router-view>
+    </div>
+    
+</body>
+<script>
+    const tem = {
+        template:`
+            <h1>this is login </h1>
+        `
+    }
+
+    const tem1 = {
+        template:  `
+            <h1>this is register</h1>
+        ` 
+    }
+
+    const routerObj = new VueRouter({
+        routes:[
+            {path: "/login" , component: tem},
+            {path: "/register", component: tem1}
+        ]
+    })
+    new Vue({
+        el: "#app",
+        data:{
+            input: '',
+            result: ''
+        },
+        router:routerObj,
+        watch: {
+            input : function(newVal, oldVal){
+                this.result = newVal + "---" + oldVal
+                console.log(this.result);
+            },
+            "$route.path":function(newVal , oldVal){
+                console.log(`newVal: ${newVal}   oldVal:${oldVal}`)
+            }
+            //监听router 
+        },
+    })
+</script>
+
+</html>
