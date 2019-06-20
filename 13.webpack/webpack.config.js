@@ -5,7 +5,21 @@ module.exports = {
     mode: "development",
     module: {
         rules: [
-            {test:/\.css$/,use:['style-loader','css-loader']} //正则表示以css结尾
+            {
+                test:/\.css$/,
+                use:['style-loader','css-loader']
+            }, //正则表示以css结尾
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ["@babel/preset-env"],
+                        plugins: ["@babel/plugin-proposal-object-rest-spread", "@babel/plugin-proposal-class-properties", "@babel/plugin-transform-runtime"]
+                    }
+                }
+            }
         ]
     },
     plugins: [
